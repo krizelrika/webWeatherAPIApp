@@ -27,4 +27,31 @@ class WeatherQuestGame {
         this.loadLastCity();
         this.checkDailyStreak();
     }
+
+    initializeElements() {
+        this.searchForm = document.getElementById('searchForm');
+        this.cityInput = document.getElementById('cityInput');
+        this.tempToggle = document.getElementById('tempToggle');
+        this.loadingSpinner = document.getElementById('loadingSpinner');
+        this.weatherCard = document.getElementById('weatherCard');
+        this.errorAlert = document.getElementById('errorAlert');
+        this.errorMessage = document.getElementById('errorMessage');
+        this.questComplete = document.getElementById('questComplete');
+        this.achievement = document.getElementById('achievement');
+        this.characterAvatar = document.getElementById('characterAvatar');
+        
+        // Weather display elements
+        this.cityName = document.getElementById('cityName');
+        this.weatherCondition = document.getElementById('weatherCondition');
+        this.weatherIcon = document.getElementById('weatherIcon');
+        this.temperature = document.getElementById('temperature');
+        this.humidity = document.getElementById('humidity');
+        this.windSpeed = document.getElementById('windSpeed');
+        
+        // Game stats elements
+        this.xpPoints = document.getElementById('xpPoints');
+        this.questsCompleted = document.getElementById('questsCompleted');
+        this.citiesExplored = document.getElementById('citiesExplored');
+        this.streakCount = document.getElementById('streakCount');
+    }
 }
