@@ -49,3 +49,41 @@ html {
     position: relative;
     z-index: 2;
 }
+
+/* Anime-style header Design */
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.app-title {
+    font-size: 2.8rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.8);
+    color: #ffffff;
+    animation: titleGlow 3s ease-in-out infinite alternate;
+    /* High contrast white text for accessibility */
+    text-decoration: none;
+    outline: none;
+}
+
+.subtitle {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-bottom: 20px;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+@keyframes titleGlow {
+    0% { 
+        filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.6));
+        text-shadow: 0 4px 20px rgba(0,0,0,0.8), 0 0 30px rgba(255, 255, 255, 0.3);
+    }
+    100% { 
+        filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.9));
+        text-shadow: 0 4px 20px rgba(0,0,0,0.8), 0 0 40px rgba(255, 255, 255, 0.5);
+    }
+}
