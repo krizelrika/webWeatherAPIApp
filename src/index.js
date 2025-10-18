@@ -54,4 +54,22 @@ class WeatherQuestGame {
         this.citiesExplored = document.getElementById('citiesExplored');
         this.streakCount = document.getElementById('streakCount');
     }
+
+    attachEventListeners() {
+        this.searchForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const city = this.cityInput.value.trim();
+            if (city) {
+                this.searchWeather(city);
+            }
+        });
+
+        this.tempToggle.addEventListener('click', () => {
+            this.toggleTemperatureUnit();
+        });
+
+        this.characterAvatar.addEventListener('click', () => {
+            this.showCharacterMessage();
+        });
+    }
 }
