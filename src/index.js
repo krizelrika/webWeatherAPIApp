@@ -244,4 +244,95 @@ class WeatherQuestGame {
         
         this.weatherCard.classList.remove('hidden');
     }
+
+     completeQuest(city) {
+        // Award XP and update stats
+        const xpGained = 50 + Math.floor(Math.random() * 50);
+        this.gameStats.xp += xpGained;
+        this.gameStats.questsCompleted += 1;
+        
+        if (!this.gameStats.citiesExplored.includes(city.toLowerCase())) {
+            this.gameStats.citiesExplored.push(city.toLowerCase());
+            this.gameStats.xp += 25; // Bonus for new city
+        }
+        
+        this.updateDailyStreak();
+        this.saveGameStats();
+        this.updateGameStats();
+        this.showQuestComplete(xpGained);
+        this.checkAchievements();
+        this.updateCharacterAvatar();
+    }
+
+    showQuestComplete(xp) {
+        this.questComplete.textContent = `🎉 Quest Complete! +${xp} XP`;
+        this.questComplete.style.display = 'block';
+        setTimeout(() => {
+            this.questComplete.style.display = 'none';
+        }, 3000);
+    }
+
+    checkAchievements() {
+        this.achievements.forEach(achievement => {
+            const achievementKey = `achievement_${achievement.id}`;
+            const alreadyUnlocked = localStorage.getItem(achievementKey);
+            
+            if (!alreadyUnlocked && achievement.condition()) {
+                localStorage.setItem(achievementKey, 'true');
+                this.showAchievement(achievement.name);
+            }
+        });
+    }
+
+    showAchievement(name) {
+        this.achievement.textContent = `🏆 ${name} Unlocked!`;
+        this.achievement.classList.add('show');
+        setTimeout(() => {
+            this.achievement.classList.remove('show');
+        }, 4000);
+    }
+
+    updateCharacterAvatar() {
+        const avatars = ['🌟', '⚡', '🔮', '🌙', '☄️', '🌈'];
+        const level = Math.floor(this.gameStats.xp / 100);
+        const avatarIndex = Math.min(level, avatars.length - 1);
+        this.characterAvatar.textContent = avatars[avatarIndex];
+    }
+
+    showCharacterMessage() {
+        const messages = [
+            "Keep exploring, weather guardian! 🌟",
+            "The spirits are proud of your progress! ⚡",
+            "Each city holds new mysteries... 🔮",
+            "Your weather powers grow stronger! 💪",
+            "The elements respond to your call! 🌊"
+        ];
+        
+        const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+        
+        // Create temporary message bubble
+        const bubble = document.createElement('div');
+        bubble.style.cssText = `
+            position: fixed;
+            top: 120px;
+            right: 20px;
+            background: rgba(168, 230, 207, 0.95);
+            color: #2c3e50;
+            padding: 15px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            z-index: 1000;
+            animation: fadeInOut 3s ease-in-out;
+            max-width: 250px;
+            text-align: center;
+        `;
+        bubble.textContent = randomMessage;
+        document.body.appendChild(bubble);
+        
+        setTimeout(() => {
+            document.body.removeChild(bubble);
+        }, 3000);
+    }
+
+    
 }
