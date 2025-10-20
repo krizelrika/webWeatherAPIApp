@@ -153,3 +153,108 @@ html {
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-5px); }
 }
+
+/* Search section with anime styling */
+.search-container {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.search-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    position: relative;
+}
+
+.search-input {
+    padding: 15px 25px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 30px;
+    font-size: 1rem;
+    width: 280px;
+    background: rgba(255,255,255,0.1);
+    color: white;
+    backdrop-filter: blur(15px);
+    transition: all 0.3s ease;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.search-input::placeholder {
+    color: rgba(255,255,255,0.7);
+}
+
+.search-input:focus {
+    outline: none;
+    background: rgba(255,255,255,0.2);
+    border-color: rgba(168, 230, 207, 0.8);
+    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(168, 230, 207, 0.3);
+}
+
+.search-btn {
+    padding: 15px 25px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(45deg, #a8e6cf, #88d8c0);
+    color: #2c3e50;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    font-family: 'Noto Sans JP', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.search-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(168, 230, 207, 0.4);
+    background: linear-gradient(45deg, #88d8c0, #a8e6cf);
+}
+
+.temp-toggle {
+    padding: 12px 24px;
+    border: 2px solid rgba(255,255,255,0.5);
+    border-radius: 30px;
+    background: transparent;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Noto Sans JP', sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+.temp-toggle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.temp-toggle:hover::before {
+    left: 100%;
+}
+
+.temp-toggle:hover {
+    background: rgba(255,255,255,0.2);
+    transform: scale(1.05);
+    border-color: #a8e6cf;
+}
+
+.temp-toggle.active {
+    background: linear-gradient(45deg, #a8e6cf, #88d8c0);
+    border-color: white;
+    color: #2c3e50;
+}
+
