@@ -85,7 +85,7 @@ class WeatherQuestGame {
         }
     }
 
-     async fetchWeather(city) {
+    async fetchWeather(city) {
         const API_KEY = 'CJ2QZGNCENC27QMWJ7Q8CY6Y3';
         const API_URL = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=metric`;
 
@@ -212,5 +212,36 @@ class WeatherQuestGame {
         }
     }
 
+    async searchWeather(city) {
+        this.showLoading();
+        this.hideError();
 
+        try {
+            const weatherData = await this.fetchWeather(city);
+            this.currentWeatherData = weatherData;
+            this.displayWeather(weatherData);
+            this.updateBackground(weatherData.condition);
+            this.completeQuest(city);
+            this.saveLastCity(city);
+        } catch (error) {
+            this.showError('The weather spirits are hiding! Try another city, brave explorer.');
+        } finally {
+            this.hideLoading();
+        }
+    }
+
+    displayWeather(data) {
+        this.cityName.textContent = `${data.city}, ${data.country}`;
+        this.weatherCondition.textContent = data.special || data.condition;
+        this.weatherIcon.textContent = data.icon;
+        
+        const temp = this.isCelsius ? data.temperatureC : data.temperatureF;
+        const unit = this.isCelsius ? '°C' : '°F';
+        this.temperature.textContent = `${temp}${unit}`;
+        
+        this.humidity.textContent = `${data.humidity}%`;
+        this.windSpeed.textContent = `${data.wind} km/h`;
+        
+        this.weatherCard.classList.remove('hidden');
+    }
 }
