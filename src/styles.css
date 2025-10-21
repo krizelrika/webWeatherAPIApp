@@ -409,3 +409,8 @@ html {
 .achievement.show {
     transform: translateX(0);
 }
+
+/* Hidden class */
+.hidden {
+    display: none !important;
+}
