@@ -334,5 +334,54 @@ class WeatherQuestGame {
         }, 3000);
     }
 
+    updateBackground(condition) {
+        document.body.classList.remove('bg-clear', 'bg-rain', 'bg-cloudy', 'bg-snow', 'bg-wind');
+        
+        switch (condition.toLowerCase()) {
+            case 'clear':
+            case 'sunny':
+                document.body.classList.add('bg-clear');
+                break;
+            case 'rain':
+            case 'rainy':
+                document.body.classList.add('bg-rain');
+                break;
+            case 'cloudy':
+            case 'overcast':
+                document.body.classList.add('bg-cloudy');
+                break;
+            case 'snow':
+            case 'snowy':
+                document.body.classList.add('bg-snow');
+                break;
+            case 'wind':
+            case 'windy':
+            case 'storm':
+                document.body.classList.add('bg-wind');
+                break;
+            default:
+                document.body.classList.add('bg-cloudy');
+        }
+    }
+
+    toggleTemperatureUnit() {
+        this.isCelsius = !this.isCelsius;
+        this.tempToggle.textContent = this.isCelsius ? '°C' : '°F';
+        
+        if (this.currentWeatherData) {
+            const temp = this.isCelsius ? 
+                this.currentWeatherData.temperatureC : 
+                this.currentWeatherData.temperatureF;
+            const unit = this.isCelsius ? '°C' : '°F';
+            this.temperature.textContent = `${temp}${unit}`;
+        }
+    }
+
+    updateGameStats() {
+        this.xpPoints.textContent = `${this.gameStats.xp} XP`;
+        this.questsCompleted.textContent = `${this.gameStats.questsCompleted} Quests`;
+        this.citiesExplored.textContent = `${this.gameStats.citiesExplored.length} Cities`;
+        this.streakCount.textContent = `${this.gameStats.streak} Streak`;
+    }
     
 }
