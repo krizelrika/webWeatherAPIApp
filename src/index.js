@@ -1,3 +1,4 @@
+import './styles.css'
 // Anime Weather Quest Game
 class WeatherQuestGame {
     constructor() {
@@ -84,10 +85,8 @@ class WeatherQuestGame {
     }
 
     async fetchWeather(city) {
-        // Replace 'YOUR_API_KEY_HERE' with your actual OpenWeatherMap API key
-        // Get your free API key at: https://openweathermap.org/api
-        const API_KEY = 'YOUR_API_KEY_HERE';
-        const API_URL = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=metric`;
+        const API_KEY = 'CJ2QZGNCENC27QMWJ7Q8CY6Y3';
+        const API_URL = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/`+city+`?unitGroup=us&key=`+API_KEY+`&contentType=json`;
 
         try {
             const response = await fetch(API_URL);
