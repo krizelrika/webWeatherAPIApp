@@ -384,5 +384,59 @@ class WeatherQuestGame {
         this.streakCount.textContent = `${this.gameStats.streak} Streak`;
     }
     
-    
+    checkDailyStreak() {
+        const today = new Date().toDateString();
+        const lastPlay = this.gameStats.lastPlayDate;
+        
+        if (lastPlay) {
+            const lastPlayDate = new Date(lastPlay);
+            const todayDate = new Date(today);
+            const diffTime = todayDate - lastPlayDate;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            if (diffDays > 1) {
+                this.gameStats.streak = 0; // Reset streak if more than 1 day
+            }
+        }
+    }
+
+    updateDailyStreak() {
+        const today = new Date().toDateString();
+        if (this.gameStats.lastPlayDate !== today) {
+            this.gameStats.streak += 1;
+            this.gameStats.lastPlayDate = today;
+        }
+    }
+
+    saveGameStats() {
+        localStorage.setItem('weatherQuest_xp', this.gameStats.xp.toString());
+        localStorage.setItem('weatherQuest_quests', this.gameStats.questsCompleted.toString());
+        localStorage.setItem('weatherQuest_cities', JSON.stringify(this.gameStats.citiesExplored));
+        localStorage.setItem('weatherQuest_streak', this.gameStats.streak.toString());
+        localStorage.setItem('weatherQuest_lastPlay', this.gameStats.lastPlayDate);
+    }
+
+    showLoading() {
+        this.loadingSpinner.style.display = 'flex';
+        this.weatherCard.classList.add('hidden');
+    }
+
+    hideLoading() {
+        this.loadingSpinner.style.display = 'none';
+    }
+
+    saveLastCity(city) {
+        localStorage.setItem('weatherQuest_lastCity', city);
+    }
+
+    loadLastCity() {
+        const lastCity = localStorage.getItem('weatherQuest_lastCity');
+        if (lastCity) {
+            this.cityInput.value = lastCity;
+            setTimeout(() => {
+                this.searchWeather(lastCity);
+            }, 1000);
+        }
+    }
+
 }
