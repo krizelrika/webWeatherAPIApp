@@ -414,3 +414,77 @@ html {
 .hidden {
     display: none !important;
 }
+
+/* Quest completion animation */
+.quest-complete {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(45deg, #a8e6cf, #88d8c0);
+    color: #2c3e50;
+    padding: 30px 50px;
+    border-radius: 25px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    z-index: 1000;
+    animation: questPop 0.8s ease-out;
+    box-shadow: 0 20px 60px rgba(168, 230, 207, 0.4);
+    display: none;
+}
+
+@keyframes questPop {
+    0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+    50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+/* Loading animation with anime style */
+.loading {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.spinner {
+    width: 80px;
+    height: 80px;
+    border: 6px solid rgba(255,255,255,0.2);
+    border-top: 6px solid #a8e6cf;
+    border-radius: 50%;
+    animation: spin 1.5s linear infinite;
+    position: relative;
+}
+
+.spinner::after {
+    content: '⚡';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.8); }
+}
+
+.loading-text {
+    font-size: 1.4rem;
+    opacity: 0.9;
+    font-weight: 500;
+    animation: loadingPulse 2s ease-in-out infinite;
+}
+
+@keyframes loadingPulse {
+    0%, 100% { opacity: 0.9; }
+    50% { opacity: 0.5; }
+}

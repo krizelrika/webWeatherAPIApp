@@ -384,4 +384,5 @@ class WeatherQuestGame {
         this.streakCount.textContent = `${this.gameStats.streak} Streak`;
     }
     
+    
 }
