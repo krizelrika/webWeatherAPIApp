@@ -1,5 +1,3 @@
-import "./styles.css";
-
 // Anime Weather Quest Game
 class WeatherQuestGame {
     constructor() {
@@ -73,7 +71,7 @@ class WeatherQuestGame {
         });
     }
 
-     createParticles() {
+    createParticles() {
         const particlesContainer = document.getElementById('particles');
         for (let i = 0; i < 20; i++) {
             const particle = document.createElement('div');
@@ -86,7 +84,9 @@ class WeatherQuestGame {
     }
 
     async fetchWeather(city) {
-        const API_KEY = 'CJ2QZGNCENC27QMWJ7Q8CY6Y3';
+        // Replace 'YOUR_API_KEY_HERE' with your actual OpenWeatherMap API key
+        // Get your free API key at: https://openweathermap.org/api
+        const API_KEY = 'YOUR_API_KEY_HERE';
         const API_URL = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=metric`;
 
         try {
@@ -245,7 +245,7 @@ class WeatherQuestGame {
         this.weatherCard.classList.remove('hidden');
     }
 
-     completeQuest(city) {
+    completeQuest(city) {
         // Award XP and update stats
         const xpGained = 50 + Math.floor(Math.random() * 50);
         this.gameStats.xp += xpGained;
@@ -383,7 +383,7 @@ class WeatherQuestGame {
         this.citiesExplored.textContent = `${this.gameStats.citiesExplored.length} Cities`;
         this.streakCount.textContent = `${this.gameStats.streak} Streak`;
     }
-    
+
     checkDailyStreak() {
         const today = new Date().toDateString();
         const lastPlay = this.gameStats.lastPlayDate;
@@ -425,6 +425,16 @@ class WeatherQuestGame {
         this.loadingSpinner.style.display = 'none';
     }
 
+    showError(message) {
+        this.errorMessage.textContent = message;
+        this.errorAlert.style.display = 'block';
+        setTimeout(() => this.hideError(), 5000);
+    }
+
+    hideError() {
+        this.errorAlert.style.display = 'none';
+    }
+
     saveLastCity(city) {
         localStorage.setItem('weatherQuest_lastCity', city);
     }
@@ -438,5 +448,20 @@ class WeatherQuestGame {
             }, 1000);
         }
     }
-
 }
+
+// Initialize the anime weather quest game
+document.addEventListener('DOMContentLoaded', () => {
+    new WeatherQuestGame();
+});
+
+// Add CSS animation for fadeInOut
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes fadeInOut {
+        0% { opacity: 0; transform: translateY(-10px); }
+        20%, 80% { opacity: 1; transform: translateY(0); }
+        100% { opacity: 0; transform: translateY(-10px); }
+    }
+`;
+document.head.appendChild(style);
