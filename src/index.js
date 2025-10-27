@@ -102,7 +102,8 @@ class WeatherQuestGame {
             }
 
             const data = await response.json();
-            
+            console.log("----DEBUG API DATA------");
+            console.log(data);
             // Convert weather data to our format with anime flair
             const weatherCondition = data.weather[0].main.toLowerCase();
             const description = data.weather[0].description;
@@ -111,7 +112,8 @@ class WeatherQuestGame {
             const countryFlags = {
                 'JP': '🇯🇵', 'US': '🇺🇸', 'GB': '🇬🇧', 'FR': '🇫🇷', 'DE': '🇩🇪',
                 'IT': '🇮🇹', 'ES': '🇪🇸', 'CA': '🇨🇦', 'AU': '🇦🇺', 'BR': '🇧🇷',
-                'IN': '🇮🇳', 'CN': '🇨🇳', 'RU': '🇷🇺', 'KR': '🇰🇷', 'MX': '🇲🇽'
+                'IN': '🇮🇳', 'CN': '🇨🇳', 'RU': '🇷🇺', 'KR': '🇰🇷', 'MX': '🇲🇽',
+                'PH': '🇵🇭'
             };
             
             const countryFlag = countryFlags[data.sys.country] || '🌍';
@@ -224,6 +226,7 @@ class WeatherQuestGame {
             this.saveLastCity(city);
         } catch (error) {
             this.showError('The weather spirits are hiding! Try another city, brave explorer.');
+            console.log(error);
         } finally {
             this.hideLoading();
         }
