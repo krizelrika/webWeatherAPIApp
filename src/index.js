@@ -112,10 +112,10 @@ class WeatherQuestGame {
             
             // Get country flag emoji
             const countryFlags = {
-                'Japan': '🇯🇵', 'US': '🇺🇸', 'GB': '🇬🇧', 'FR': '🇫🇷', 'DE': '🇩🇪',
-                'IT': '🇮🇹', 'ES': '🇪🇸', 'CA': '🇨🇦', 'AU': '🇦🇺', 'BR': '🇧🇷',
-                'IN': '🇮🇳', 'CN': '🇨🇳', 'RU': '🇷🇺', 'KR': '🇰🇷', 'MX': '🇲🇽',
-                'PH': '🇵🇭'
+                'Japan': '🇯🇵', 'United States': '🇺🇸', 'Great Britain': '🇬🇧', 'France': '🇫🇷', 'Denmark': '🇩🇪',
+                'Italy': '🇮🇹', 'Estonia': '🇪🇸', 'Canada': '🇨🇦', 'Australia': '🇦🇺', 'Brazil': '🇧🇷',
+                'India': '🇮🇳', 'China': '🇨🇳', 'Russia': '🇷🇺', 'Korea': '🇰🇷', 'Mexico': '🇲🇽',
+                'Philippines': '🇵🇭'
             };
             
             const countryFlag = countryFlags[data.resolvedAddress] || '🌍';
@@ -193,17 +193,17 @@ class WeatherQuestGame {
             return {
                 city: data.name,
                 country: `${data.resolvedAddress} ${countryFlag}`,
-                temperatureC: Math.round(data.main.temp),
-                temperatureF: Math.round(data.main.temp * 9/5 + 32),
-                condition: data.weather[0].main,
+                temperatureC: Math.round((data.currentConditions.temp-32) * 5/9),
+                temperatureF: Math.round(data.currentConditions.temp),
+                condition: data.currentConditions.conditions,
                 description: description,
-                humidity: data.main.humidity,
-                wind: Math.round(data.wind.speed * 3.6), // Convert m/s to km/h
+                humidity: data.currentConditions.humidity,
+                wind: Math.round(data.currentConditions.windspeed * 3.6), // Convert m/s to km/h
                 icon: weatherInfo.icon,
                 special: specialMessage,
-                pressure: data.main.pressure,
-                feelsLike: Math.round(data.main.feels_like),
-                visibility: data.visibility ? Math.round(data.visibility / 1000) : null
+                pressure: data.currentConditions.pressure,
+                feelsLike: Math.round(data.currentConditions.feelslike),
+                visibility: data.currentConditions.visibility ? Math.round(data.currentConditions.visibility / 1000) : null
             };
             
         } catch (error) {
