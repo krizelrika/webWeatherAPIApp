@@ -104,19 +104,21 @@ class WeatherQuestGame {
             const data = await response.json();
             console.log("----DEBUG API DATA------");
             console.log(data);
+            console.log(data.description);
+            console.log(data.currentConditions.icon);
             // Convert weather data to our format with anime flair
-            const weatherCondition = data.weather[0].main.toLowerCase();
-            const description = data.weather[0].description;
+            const weatherCondition = data.currentConditions.icon;
+            const description = data.description;
             
             // Get country flag emoji
             const countryFlags = {
-                'JP': '🇯🇵', 'US': '🇺🇸', 'GB': '🇬🇧', 'FR': '🇫🇷', 'DE': '🇩🇪',
+                'Japan': '🇯🇵', 'US': '🇺🇸', 'GB': '🇬🇧', 'FR': '🇫🇷', 'DE': '🇩🇪',
                 'IT': '🇮🇹', 'ES': '🇪🇸', 'CA': '🇨🇦', 'AU': '🇦🇺', 'BR': '🇧🇷',
                 'IN': '🇮🇳', 'CN': '🇨🇳', 'RU': '🇷🇺', 'KR': '🇰🇷', 'MX': '🇲🇽',
                 'PH': '🇵🇭'
             };
             
-            const countryFlag = countryFlags[data.sys.country] || '🌍';
+            const countryFlag = countryFlags[data.resolvedAddress] || '🌍';
             
             // Map weather conditions to anime-style icons and special messages
             const weatherMapping = {
@@ -190,7 +192,7 @@ class WeatherQuestGame {
             
             return {
                 city: data.name,
-                country: `${data.sys.country} ${countryFlag}`,
+                country: `${data.resolvedAddress} ${countryFlag}`,
                 temperatureC: Math.round(data.main.temp),
                 temperatureF: Math.round(data.main.temp * 9/5 + 32),
                 condition: data.weather[0].main,
