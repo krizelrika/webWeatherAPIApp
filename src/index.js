@@ -111,6 +111,8 @@ class WeatherQuestGame {
             const description = data.description;
             
             // Get country flag emoji
+            const cityParamArray = city.split(/[, ]+/);
+            console.log(cityParamArray);
             const countryFlags = {
                 'Japan': '🇯🇵', 'United States': '🇺🇸', 'Great Britain': '🇬🇧', 'France': '🇫🇷', 'Denmark': '🇩🇪',
                 'Italy': '🇮🇹', 'Estonia': '🇪🇸', 'Canada': '🇨🇦', 'Australia': '🇦🇺', 'Brazil': '🇧🇷',
@@ -118,7 +120,7 @@ class WeatherQuestGame {
                 'Philippines': '🇵🇭'
             };
             
-            const countryFlag = countryFlags[data.resolvedAddress] || '🌍';
+            const countryFlag = countryFlags[cityParamArray[1]] || '🌍';
             
             // Map weather conditions to anime-style icons and special messages
             const weatherMapping = {
@@ -191,8 +193,8 @@ class WeatherQuestGame {
             const specialMessage = citySpecials[cityKey] || weatherInfo.special;
             
             return {
-                city: data.name,
-                country: `${data.resolvedAddress} ${countryFlag}`,
+                city: cityParamArray[0],
+                country: `${cityParamArray[1]} ${countryFlag}`,
                 temperatureC: Math.round((data.currentConditions.temp-32) * 5/9),
                 temperatureF: Math.round(data.currentConditions.temp),
                 condition: data.currentConditions.conditions,
