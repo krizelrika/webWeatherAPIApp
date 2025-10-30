@@ -107,7 +107,7 @@ class WeatherQuestGame {
             console.log(data.description);
             console.log(data.currentConditions.icon);
             // Convert weather data to our format with anime flair
-            const weatherCondition = data.currentConditions.icon;
+            const weatherCondition = data.currentConditions.conditions;
             const description = data.description;
             
             // Get country flag emoji
@@ -131,6 +131,14 @@ class WeatherQuestGame {
                 'clouds': { 
                     icon: '☁️', 
                     special: 'Mystical clouds drift through the sky...' 
+                },
+                'Partially cloudy': {
+                    icon: '☁️', 
+                    special: 'Mystical clouds drift through the sky...' 
+                },
+                'Overcast': {
+                    icon: '☁️', 
+                    special: 'Clouds are filling up the sky...' 
                 },
                 'rain': { 
                     icon: '🌧️', 
