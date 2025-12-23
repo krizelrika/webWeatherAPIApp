@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Adventure</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+<script defer src="main.js"></script></head>
+<body>
+    <!-- Floating particles -->
+    <div class="particles" id="particles"></div> 
+
+    <!-- Quest completion notification -->
+    <div class="quest-complete" id="questComplete">
+        🎉 Weather Quest Complete! +100 XP
+    </div>
+
+    <!-- Achievement notification -->
+    <div class="achievement" id="achievement">
+        🏆 New Achievement Unlocked!
+    </div>
+
+    <div class="container">
+        <!-- Character Avatar -->
+        <div class="character-avatar" id="characterAvatar" title="Your Weather Companion">
+            🌟
+        </div>
+
+        <!-- Header -->
+        <header class="header">
+            <h1 class="app-title">天気の子 Weather Quest</h1>
+            <p class="subtitle">~ Anime Weather Adventure ~</p>
+            
+            <!-- Game Stats -->
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <span class="stat-icon">⚡</span>
+                    <span class="stat-value" id="xpPoints">0 XP</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-icon">🏆</span>
+                    <span class="stat-value" id="questsCompleted">0 Quests</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-icon">🌍</span>
+                    <span class="stat-value" id="citiesExplored">0 Cities</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-icon">🔥</span>
+                    <span class="stat-value" id="streakCount">0 Streak</span>
+                </div>
+            </div>
+
+            <div class="search-container">
+                <form class="search-form" id="searchForm">
+                    <input 
+                        type="text" 
+                        class="search-input" 
+                        id="cityInput" 
+                        placeholder="Enter city to explore"
+                        aria-label="Enter city name to explore weather"
+                        required
+                    >
+                    <button type="submit" class="search-btn" aria-label="Search for weather in entered city">🔍 Explore</button>
+                </form>
+                <button class="temp-toggle active" id="tempToggle" aria-label="Toggle temperature unit between Celsius and Fahrenheit">°C</button>
+            </div>
+        </header>
+
+        <!-- Error Alert -->
+        <div class="error-alert" id="errorAlert">
+            <strong>⚠️ Quest Failed!</strong> <span id="errorMessage"></span>
+        </div>
+
+        <!-- Main Weather Display -->
+        <main class="weather-display">
+            <!-- Loading Animation -->
+            <div class="loading" id="loadingSpinner" role="status" aria-live="polite">
+                <div class="spinner" aria-hidden="true"></div>
+                <div class="loading-text" aria-label="Loading weather data">🌟 Connecting to weather spirits...</div>
+            </div>
+
+            <!-- Weather Card -->
+            <div class="weather-card hidden" id="weatherCard" role="main" aria-live="polite">
+                <div class="city-name" id="cityName" aria-label="Current city location">Welcome, Weather Guardian!</div>
+                <div class="weather-condition" id="weatherCondition" aria-label="Weather condition description">Begin your quest by exploring a city</div>
+                <div class="weather-icon" id="weatherIcon" aria-label="Weather condition icon" role="img">🌤️</div>
+                <div class="temperature" id="temperature" aria-label="Current temperature">--°</div>
+                
+                <div class="weather-details" id="weatherDetails" aria-label="Additional weather information">
+                    <div class="detail-item" role="group" aria-labelledby="humidity-label">
+                        <div class="detail-label" id="humidity-label">💧 Humidity</div>
+                        <div class="detail-value" id="humidity" aria-label="Humidity percentage">--%</div>
+                    </div>
+                    <div class="detail-item" role="group" aria-labelledby="wind-label">
+                        <div class="detail-label" id="wind-label">💨 Wind Power</div>
+                        <div class="detail-value" id="windSpeed" aria-label="Wind speed in kilometers per hour">-- km/h</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
